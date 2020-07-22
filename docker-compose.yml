@@ -18,6 +18,19 @@ services:
       - POSTGRES_DB=onlinejudge
       - POSTGRES_USER=onlinejudge
       - POSTGRES_PASSWORD=onlinejudge
+  # Uncomment to enable the resync server.    
+  # oj-rsync-master:
+  #   image: registry.cn-hangzhou.aliyuncs.com/onlinejudge/oj_rsync
+  #   container_name: oj-rsync-master
+  #   volumes:
+  #     - $PWD/data/backend/test_case:/test_case:ro
+  #     - $PWD/data/rsync_master:/log
+  #   environment:
+  #     - RSYNC_MODE=master
+  #     - RSYNC_USER=ojrsync
+  #     - RSYNC_PASSWORD=CHANGE_THIS_PASSWORD
+  #   ports:
+  #     - "0.0.0.0:873:873"
 
   judge-server:
     image: srejikumar/judge_server:javascript
@@ -44,7 +57,7 @@ services:
       # - judger_debug=1
   
   oj-backend:
-    image: srejikumar/oj_backend:javascript
+    image: srejikumar/oj_backend:dev
     container_name: oj-backend
     restart: always
     depends_on:
