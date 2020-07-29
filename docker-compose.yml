@@ -57,8 +57,8 @@ services:
       # - judger_debug=1
   
   oj-backend:
-    image: srejikumar/oj_backend:dev
-    container_name: oj-backend
+    image: srejikumar/oj_backend:dev-test-0.2
+    container_name: oj-backend 
     restart: always
     depends_on:
       - oj-redis
@@ -71,6 +71,7 @@ services:
       - POSTGRES_USER=onlinejudge
       - POSTGRES_PASSWORD=onlinejudge
       - JUDGE_SERVER_TOKEN=CHANGE_THIS
+      - PROCTOR_URL=http://localhost:3000
       # - FORCE_HTTPS=1
       # - STATIC_CDN_HOST=cdn.oj.com
     ports:
